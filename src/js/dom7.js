@@ -64,3 +64,4 @@ module.exports.Dom7 = function () {
         }
         return new Dom7(arr);
     };
+}

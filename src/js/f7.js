@@ -7,7 +7,7 @@ var $ = require("./dom7");
 // Version
 module.exports.version = '1.2.0';
 
-export.params = function(parameters) {
+module.exports.params = function(parameters) {
   // Default Parameters
   var params = {
       cache: true,
@@ -125,15 +125,27 @@ export.params = function(parameters) {
   return params;
 }
 
-      // Tap Navbar or Statusbar to scroll to top
+/*===========================
+Features Support Detection
+===========================*/
+module.exports.support = (function () {
+    var support = {
+        touch: !!(('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch)
+    };
+
+    // Export object
+    return support;
+})();
+
+// Tap Navbar or Statusbar to scroll to top
 // Template7 lib
 module.exports._compiledTemplates = {};
 
 // Touch events
 module.exports.touchEvents = {
-    start: app.support.touch ? 'touchstart' : 'mousedown',
-    move: app.support.touch ? 'touchmove' : 'mousemove',
-    end: app.support.touch ? 'touchend' : 'mouseup'
+    start: this.support.touch ? 'touchstart' : 'mousedown',
+    move: this.support.touch ? 'touchmove' : 'mousemove',
+    end: this.support.touch ? 'touchend' : 'mouseup'
 };
 
 // Link to local storage
